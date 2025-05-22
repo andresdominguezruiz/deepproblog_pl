@@ -21,7 +21,8 @@ coin_net2 = Network(coin_network2, "net2", batching=True)
 coin_net2.optimizer = torch.optim.Adam(coin_network2.parameters(), lr=lr)
 
 model = Model("model.pl", [coin_net1, coin_net2])
-model.add_tensor_source("train", train_dataset)
+model.add_tensor_source("train", train_dataset) #Indica la fuente de entrenamiento y de test. 
+#Para el de entrenamiento, luego tienes el DataLoader para escoger los datos por batch.
 model.add_tensor_source("test", test_dataset)
 model.set_engine(ExactEngine(model), cache=True)
 train_obj = train_model(
